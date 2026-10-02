@@ -1,26 +1,72 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
+/* ─────────────────────────────────────────────
+   Design tokens — all colours use modern OKLCH
+   for perceptually uniform, vibrant palettes
+───────────────────────────────────────────── */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* Brand palette */
+  --color-brand:         oklch(0.55 0.22 255);   /* vivid royal blue */
+  --color-brand-light:   oklch(0.70 0.18 255);
+  --color-brand-dark:    oklch(0.40 0.22 255);
+
+  /* Surfaces */
+  --color-surface:       oklch(0.99 0.003 240);  /* near-white with cool tint */
+  --color-surface-muted: oklch(0.96 0.008 245);  /* light grey sections */
+  --color-surface-dark:  oklch(0.14 0.03 260);   /* deep navy footer */
+
+  /* Text */
+  --color-text-base:     oklch(0.15 0.02 260);
+  --color-text-muted:    oklch(0.50 0.02 260);
+  --color-text-subtle:   oklch(0.65 0.015 260);
+  --color-text-on-brand: oklch(1.00 0.00 0);
+
+  /* Borders */
+  --color-border:        oklch(0.88 0.01 250);
+
+  /* Accents */
+  --color-accent-green:  oklch(0.72 0.18 150);
+  --color-accent-sky:    oklch(0.75 0.14 220);
+
+  /* Typography */
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+
+  /* Radius */
+  --radius-sm:   0.375rem;
+  --radius-md:   0.75rem;
+  --radius-lg:   1.25rem;
+  --radius-full: 9999px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ─────────────────────────────────────────────
+   Base resets and global styles
+───────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-surface);
+  color: var(--color-text-base);
+  font-family: var(--font-sans);
+  min-height: 100dvh;
+}
+
+/* Focus ring — visible for keyboard users, hidden for mouse */
+:focus-visible {
+  outline: 2px solid var(--color-brand);
+  outline-offset: 3px;
+}
+
+/* Smooth link transitions */
+a {
+  transition: color 0.2s ease;
 }
